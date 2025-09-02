@@ -2,48 +2,51 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public float speed = 10f;
-    private Rigidbody rb;
+    [SerializeField] private float _speed = 10f;
+    private Rigidbody2D _rb2D;
+
+    private bool _isDragging;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        Launch();
+        _rb2D = GetComponent<Rigidbody2D>();
     }   
-    // void OnCollisionEnter(Collision collision)
-    // {
-    //     if (collision.gameObject.CompareTag("Wall"))
-    //     {
-    //         // Average the normals from all contact points
-    //         Vector3 avgNormal = Vector3.zero;
-    //         foreach (ContactPoint contact in collision.contacts)
-    //         {
-    //             avgNormal += contact.normal;
-    //         }
-    //         avgNormal /= collision.contacts.Length;
-    //
-    //         Vector3 reflect = Vector3.Reflect(rb.velocity, avgNormal);
-    //
-    //         float newSpeed = Mathf.Max(reflect.magnitude * 0.9f, speed * 0.5f);
-    //         rb.velocity = reflect.normalized * newSpeed;
-    //     }
-    // }
+    
 
-    void Launch()
+    void Launch(Vector2 force)
     {
-        float x = Random.Range(-1f, 1f);
-        float y = Random.Range(-1f, 1f);
-        Vector3 direction = new Vector3(x, y, 0).normalized;
-        rb.velocity = direction * speed;
+        _rb2D.velocity = force * _speed;
     }
-
-
     
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Launch();
+            StartDrag();
         }
+        
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            EndDrag();
+        }
+
+        if (!_isDragging) return;
+        
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Debug.DrawLine(transform.position, mousePos, Color.red);
+    }
+
+    private void StartDrag()
+    {
+        _isDragging = true;
+    }
+    
+    private void EndDrag()
+    {
+        _isDragging = false;
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = -(mousePos - transform.position);
+        float distance = direction.magnitude;
+        Launch(direction.normalized * distance);
     }
 }
