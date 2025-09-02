@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Collect : MonoBehaviour
 {
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Equals("Collectible"))
@@ -25,5 +24,4 @@ public class Collect : MonoBehaviour
             PlayerPrefs.SetInt(currencyName, PlayerPrefs.GetInt(currencyName) + currencyAmount);
         }
     }
-
 }

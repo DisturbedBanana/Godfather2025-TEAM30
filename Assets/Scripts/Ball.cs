@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
@@ -67,5 +68,14 @@ public class Ball : MonoBehaviour
         Vector2 direction = -(mousePos - transform.position);
         float distance = direction.magnitude;
         Launch(direction.normalized * distance);
+        ScoreManager.Instance?.AddScore();
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("LevelEnd"))
+        {
+            LevelManager.Instance?.EndLevel();
+        }
     }
 }
