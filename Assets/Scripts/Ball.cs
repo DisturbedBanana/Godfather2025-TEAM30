@@ -10,24 +10,24 @@ public class Ball : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Launch();
     }   
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            // Average the normals from all contact points
-            Vector3 avgNormal = Vector3.zero;
-            foreach (ContactPoint contact in collision.contacts)
-            {
-                avgNormal += contact.normal;
-            }
-            avgNormal /= collision.contacts.Length;
-
-            Vector3 reflect = Vector3.Reflect(rb.velocity, avgNormal);
-
-            float newSpeed = Mathf.Max(reflect.magnitude * 0.9f, speed * 0.5f);
-            rb.velocity = reflect.normalized * newSpeed;
-        }
-    }
+    // void OnCollisionEnter(Collision collision)
+    // {
+    //     if (collision.gameObject.CompareTag("Wall"))
+    //     {
+    //         // Average the normals from all contact points
+    //         Vector3 avgNormal = Vector3.zero;
+    //         foreach (ContactPoint contact in collision.contacts)
+    //         {
+    //             avgNormal += contact.normal;
+    //         }
+    //         avgNormal /= collision.contacts.Length;
+    //
+    //         Vector3 reflect = Vector3.Reflect(rb.velocity, avgNormal);
+    //
+    //         float newSpeed = Mathf.Max(reflect.magnitude * 0.9f, speed * 0.5f);
+    //         rb.velocity = reflect.normalized * newSpeed;
+    //     }
+    // }
 
     void Launch()
     {
