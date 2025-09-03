@@ -1,7 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
-using TMPro;
 
 public class Level : MonoBehaviour
 {
@@ -13,10 +13,15 @@ public class Level : MonoBehaviour
     
     [SerializeField] private List<SpriteRenderer> _wallSpriteRenderers = new List<SpriteRenderer>();
 
+    private void Awake()
+    {
+        ScoreManager.Instance?.ResetScore(Par);
+    }
+
     [Button("Collect Wall SpriteRenderers")]
     public void CollectWallSpriteRenderers()
     {
-        _wallSpriteRenderers.Clear(); // Clear the list to avoid duplicates
+        _wallSpriteRenderers.Clear();
 
         foreach (Transform child in transform)
         {

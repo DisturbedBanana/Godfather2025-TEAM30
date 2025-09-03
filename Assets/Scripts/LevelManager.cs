@@ -1,13 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class LevelManager : MonoBehaviour
 {
     private static LevelManager _instance;
     public static LevelManager Instance { get { return _instance; } }
+    
+    [SerializeField] private GameObject _levelNameObject;
     
     [SerializeField] private List<GameObject> _levelPrefabs;
     private int _currentLevelIndex = 0;
@@ -28,9 +28,14 @@ public class LevelManager : MonoBehaviour
     {
         if (_currentLevelIndex <= _levelPrefabs.Count - 1)
         {
-            Debug.Log("Loading level: " + _levelPrefabs[_currentLevelIndex].name);
-            GameObject newLevelObject = Instantiate(_levelPrefabs[_currentLevelIndex], Vector2.zero, Quaternion.identity);
-            _currentLevelIndex++;
+            var levelName = _levelPrefabs[_currentLevelIndex].GetComponent<Level>().LevelName;
+            _levelNameObject.GetComponent<LevelNameMovements>()
+                .MoveObjectAndSetText(levelName, () =>
+                {
+                    Debug.Log("Loading level: " + _levelPrefabs[_currentLevelIndex].name);
+                    Instantiate(_levelPrefabs[_currentLevelIndex], Vector2.zero, Quaternion.identity);
+                    _currentLevelIndex++;
+                });
         }
         else
         {
