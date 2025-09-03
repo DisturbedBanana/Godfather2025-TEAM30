@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5a35693f9a1c1d47845debbff669070, type: 3}
+  m_Name: TestDialog
+  m_EditorClassIdentifier: 
+  dialogData:
+  - speaker: 1
+    textContent: "Bon sang, qu'est-ce qu'on peut s'ennuyer ici\u2026 Pourquoi suis-je
+      devenu le propri\xE9taire d'une \xEEle d\xE9serte\u2026"
+  - speaker: 2
+    textContent: Mon petit, cette paix est ce pourquoi lutte tous les vrais guerriers
+      !
+  - speaker: 1
+    textContent: "Qui a dit \xE7a ?"
+  - speaker: 2
+    textContent: "Personne. Le 4\xE8me mur est intact. Et la terre est plate."
+  - speaker: 1
+    textContent: "Je suis rassur\xE9. Mais\u2026 C'est un naufrag\xE9 \xE9chou\xE9
+      ! C'est l'occasion de mettre un peu d'animation. "
+  - speaker: 0
+    textContent: "Ouille\u2026 Ma t\xEAte\u2026 O\xF9 suis-je ?"
+  - speaker: 1
+    textContent: "TU ES SUR MON \xCELE ! PRISONNIER !"
+  - speaker: 0
+    textContent: Pourquoi vous hurlez ?
