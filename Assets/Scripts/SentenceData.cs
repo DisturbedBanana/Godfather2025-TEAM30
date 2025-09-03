@@ -3,17 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Simple structure serializable qui décrit une phrase qui sera ajoutable dans la database de dialog
 [Serializable]
-
 public struct SentenceData
 {
-    public string SpeakerName;
-    public string TextContent;
+    public DIALOG_SPEAKER speaker;
+    public string textContent;
 
-    public SentenceData(string SpeakerName, string TextContent)
+    public SentenceData(DIALOG_SPEAKER speaker, string textContent)
     {
-        this.SpeakerName = SpeakerName;
-        this.TextContent = TextContent;
+        this.speaker = speaker;
+        this.textContent = textContent;
     }
+}
+
+//Enum pour savoir qui est la personne qui parle actuellement
+public enum DIALOG_SPEAKER
+{
+    PLAYER,
+    STRANGER
 }
 
