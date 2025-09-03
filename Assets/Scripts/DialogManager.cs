@@ -1,17 +1,21 @@
+using DG.Tweening;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using TMPro;
 using UnityEngine.UI;
 
 public class DialogManager : MonoBehaviour, IPointerClickHandler
 {
     public DialogDatabase dialogDatabase;
+    public TMP_Text speakerText;
     public TMP_Text dialogText;
     public Image playerImg;
     public Image strangerImg;
 
     private int counter = 0;
-    private bool isClickable => counter < dialogDatabase.dialogData.Count;
+    private bool isWriting = false;
+    private bool isClickable => counter < dialogDatabase.dialogData.Count && !isWriting;
     
     private void Start()
     {
@@ -22,6 +26,7 @@ public class DialogManager : MonoBehaviour, IPointerClickHandler
     {
         if(isClickable)
         {
+            isWriting = true;
             DisplaySentence();
         }
     }
@@ -32,7 +37,7 @@ public class DialogManager : MonoBehaviour, IPointerClickHandler
         //Affiche l'image de la personne qui parle (player ou stranger)
         Color playerColor = playerImg.color;
         Color strangerColor = strangerImg.color;
-        switch (dialogDatabase.dialogData[counter].speaker)
+        switch (dialogDatabase.dialogData[counter].speakerType)
         {
             case DIALOG_SPEAKER.PLAYER :
                 playerColor.a = 100;
@@ -47,8 +52,22 @@ public class DialogManager : MonoBehaviour, IPointerClickHandler
         strangerImg.color = strangerColor;
 
         //Remplace le texte du dialogue
-        dialogText.text = dialogDatabase.dialogData[counter].textContent;
+        speakerText.text = dialogDatabase.dialogData[counter].speakerName;
+        StartCoroutine(WriteSentence());
         counter++;
+    }
+
+    IEnumerator WriteSentence()
+    {
+        dialogText.text = "";
+
+        foreach (char letter in dialogDatabase.dialogData[counter].textContent.ToCharArray())
+        {
+            dialogText.text += letter;
+
+            yield return null;
+        }
+        isWriting = false;
     }
 
 
