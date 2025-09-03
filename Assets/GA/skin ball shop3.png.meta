@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: aee2755a427403e4bb2800d71494bc33
+guid: 98ac5349c22a5d843bbd4e9438145f02
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1261443155207783716
-    second: plant5_0
-  - first:
-      213: 8342376239901792362
-    second: plant5_1
+      213: -5623119605129810190
+    second: skin ball shop3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: plant5_0
+      name: skin ball shop3_0
       rect:
         serializedVersion: 2
-        x: 55
-        y: 86
-        width: 79
-        height: 99
+        x: 0
+        y: 0
+        width: 800
+        height: 800
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,30 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cdafd7d32247e7ee0800000000000000
-      internalID: -1261443155207783716
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: plant5_1
-      rect:
-        serializedVersion: 2
-        x: 131
-        y: 33
-        width: 229
-        height: 208
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a68510a8df216c370800000000000000
-      internalID: 8342376239901792362
+      spriteID: 2fee3bef28aa6f1b0800000000000000
+      internalID: -5623119605129810190
       vertices: []
       indices: 
       edges: []
@@ -159,9 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      plant5_0: -1261443155207783716
-      plant5_1: 8342376239901792362
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

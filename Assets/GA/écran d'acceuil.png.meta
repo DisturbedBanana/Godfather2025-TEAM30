@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "\xE9cran d'acceuil_0": -7031661058768901213
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
