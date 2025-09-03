@@ -17,7 +17,7 @@ public class Ball : MonoBehaviour
 
     void Launch(Vector2 force)
     {
-        _rb2D.velocity = force * _speed;
+        _rb2D.linearVelocity = force * _speed;
     }
 
     private void Update()
