@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using NaughtyAttributes;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Rendering.Universal;
@@ -13,38 +12,48 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Light2D _levelLight;
     
     [SerializeField] private List<GameObject> _levelPrefabs;
-    private int _currentLevelIndex = 0;
-    public GameObject CurrentLevelObject;
+    private int _currentLevelIndex;
+    
+    private GameObject _currentLevelObject;
+    public GameObject CurrentLevelObject => _currentLevelObject;
+    
+    private int _currentPar;
+    public int CurrentPar => _currentPar;
+    
+    private string _currentLevelName;
+    public string CurrentLevelName => _currentLevelName;
     
     private void Awake()
     {  
         _instance ??= this;
     }
-
-    public void EndLevel()
-    {
-        Debug.Log("Ending level");
-        
-    }
     
-    [Button("Load Next Level")]
-    public void LoadNextLevel()
+    public void LoadNextLevel(bool isARetry = false)
     {
+        // For retry, we need to go back one level since we already incremented
+        if (isARetry && _currentLevelIndex > 0)
+        {
+            _currentLevelIndex--;
+        }
+
         DOTween.To(
             () => _levelLight.intensity,
             x => _levelLight.intensity = x,
             1f,
             2f
         ).SetEase(Ease.InOutElastic);
-        if (_currentLevelIndex <= _levelPrefabs.Count - 1)
+
+        if (_currentLevelIndex >= 0 && _currentLevelIndex < _levelPrefabs.Count)
         {
-            var levelName = _levelPrefabs[_currentLevelIndex].GetComponent<Level>().LevelName;
+            int levelIndexToLoad = _currentLevelIndex;
+
+            _currentLevelName = _levelPrefabs[levelIndexToLoad].GetComponent<Level>().LevelName;
             _levelNameObject.GetComponent<LevelNameMovements>()
-                .MoveObjectAndSetText(levelName, () =>
+                .MoveObjectAndSetText(_currentLevelName, () =>
                 {
-                    Debug.Log("Loading level: " + _levelPrefabs[_currentLevelIndex].name);
-                    CurrentLevelObject = Instantiate(_levelPrefabs[_currentLevelIndex], Vector2.zero, Quaternion.identity);
-                    _currentLevelIndex++;
+                    Debug.Log("Loading level: " + _levelPrefabs[levelIndexToLoad].name);
+                    _currentLevelObject = Instantiate(_levelPrefabs[levelIndexToLoad], Vector2.zero, Quaternion.identity);
+                    _currentPar = _currentLevelObject.GetComponent<Level>().Par;
                     DOTween.To(
                         () => _levelLight.intensity,
                         x => _levelLight.intensity = x,
@@ -52,10 +61,18 @@ public class LevelManager : MonoBehaviour
                         2f
                     ).SetEase(Ease.InOutElastic);
                 });
+
+            // Only increment level index if not retrying
+            if (!isARetry) _currentLevelIndex++;
         }
         else
         {
-            Debug.Log("No more levels to load.");
+            Debug.LogWarning("No more levels to load or index is out of range.");
         }
+    }
+
+    public void DestroyLevel()
+    {
+        Destroy(CurrentLevelObject);
     }
 }

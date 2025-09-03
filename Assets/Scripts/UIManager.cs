@@ -1,0 +1,54 @@
+using System;
+using UnityEngine;
+using TMPro;
+
+public class UIManager : MonoBehaviour
+{
+    public static UIManager Instance;
+    
+    [SerializeField] private GameObject _menuCanvas;
+    [SerializeField] private GameObject _levelCanvas;
+    [SerializeField] private GameObject _postLevelCanvas;
+    [SerializeField] private GameObject _dialogCanvas;
+    
+    [SerializeField] private TextMeshProUGUI _postLevelNameText;
+    [SerializeField] private TextMeshProUGUI _postLevelScoreText;
+    [SerializeField] private TextMeshProUGUI _postLevelTotalScoreText;
+    [SerializeField] private TextMeshProUGUI _postLevelParText;
+
+    private void Awake()
+    {
+        Instance ??= this;
+    }
+
+    public void PlayNext(bool fromMenu)
+    {
+        if (fromMenu)
+            _menuCanvas.SetActive(false);
+        else
+            _postLevelCanvas.SetActive(false);
+        
+        _levelCanvas.SetActive(true);
+        LevelManager.Instance.LoadNextLevel();
+    }
+
+    public void Retry()
+    {
+        _postLevelCanvas.SetActive(false);
+        _levelCanvas.SetActive(true);
+        LevelManager.Instance.LoadNextLevel(true);
+    }
+
+
+    public void LevelFinished() 
+    {
+        ScoreManager.Instance.CalculateScores();
+        _levelCanvas.SetActive(false);
+        _postLevelCanvas.SetActive(true);
+        _postLevelNameText.text = LevelManager.Instance.CurrentLevelName;
+        _postLevelParText.text = $"Par: {LevelManager.Instance.CurrentPar}";
+        _postLevelScoreText.text = $"Level Score: {ScoreManager.Instance.CurrentLevelScore}";
+        _postLevelTotalScoreText.text = $"Total Score: {ScoreManager.Instance.TotalScore}";
+        LevelManager.Instance.DestroyLevel();
+    }
+}
