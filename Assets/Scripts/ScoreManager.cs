@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -20,12 +17,19 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        _scoreText.text = _currentScore.ToString();
+        _scoreText.text = "Score : " + _currentScore.ToString();
     }
 
     public void AddScore()
     {
         _currentScore++;
-        _scoreText.text = _currentScore.ToString();
+        _scoreText.text = "Score : " + _currentScore.ToString();
+    }
+
+    public void ResetScore(int par)
+    {
+        _currentScore = 0;
+        _scoreText.text = "Score : " + _currentScore.ToString();
+        _parText.text = "Par: " + par;
     }
 }
