@@ -21,6 +21,12 @@ public class UIManager : MonoBehaviour
         Instance ??= this;
     }
 
+    public void DisplayMenu()
+    {
+        _dialogCanvas.SetActive(false);
+        _menuCanvas.SetActive(true);
+    }
+    
     public void PlayNext(bool fromMenu)
     {
         if (fromMenu)
