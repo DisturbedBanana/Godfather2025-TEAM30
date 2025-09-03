@@ -11,7 +11,8 @@ public class DialogManager : MonoBehaviour, IPointerClickHandler
     public Image strangerImg;
 
     private int counter = 0;
-
+    private bool isClickable => counter < dialogDatabase.dialogData.Count;
+    
     private void Start()
     {
         DisplaySentence();
@@ -19,7 +20,10 @@ public class DialogManager : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData pointerEventData)
     {
-        DisplaySentence();
+        if(isClickable)
+        {
+            DisplaySentence();
+        }
     }
 
     //Fonction qui va afficher les nouvelles phrases contenue dans la database du dialogue
