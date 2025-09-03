@@ -34,25 +34,39 @@ public class DialogManager : MonoBehaviour, IPointerClickHandler
     //Fonction qui va afficher les nouvelles phrases contenue dans la database du dialogue
     private void DisplaySentence()
     {
-        //Affiche l'image de la personne qui parle (player ou stranger)
+        //Change le nom de la personne qui parle, change le sprite si c'est un stranger
+        switch (dialogDatabase.dialogData[counter].speaker)
+        {
+            case DIALOG_SPEAKER.NAUFRAGE:
+                speakerText.text = "Le Naufragé";
+                break;
+            case DIALOG_SPEAKER.MECHANT:
+                speakerText.text = "Monsieur Méchant";
+                //Mettre le sprite du mechant sur strangerImg
+                break;
+            case DIALOG_SPEAKER.DEV:
+                speakerText.text = "Un dev";
+                //Mettre le sprite du dev sur strangerImg
+                break;
+        }
+
+        //Change les alphas pour afficher l'image du joueur ou du stranger
         Color playerColor = playerImg.color;
         Color strangerColor = strangerImg.color;
-        switch (dialogDatabase.dialogData[counter].speakerType)
+        if (dialogDatabase.dialogData[counter].speaker == DIALOG_SPEAKER.NAUFRAGE)
         {
-            case DIALOG_SPEAKER.PLAYER :
-                playerColor.a = 100;
-                strangerColor.a = 0;
-                break;
-            case DIALOG_SPEAKER.STRANGER :
-                strangerColor.a = 100;
-                playerColor.a = 0;
-                break;
+            playerColor.a = 100;
+            strangerColor.a = 0;
+        }
+        else
+        {
+            strangerColor.a = 100;
+            playerColor.a = 0;
         }
         playerImg.color = playerColor;
         strangerImg.color = strangerColor;
 
         //Remplace le texte du dialogue
-        speakerText.text = dialogDatabase.dialogData[counter].speakerName;
         StartCoroutine(WriteSentence());
         counter++;
     }

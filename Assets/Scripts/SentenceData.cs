@@ -7,14 +7,12 @@ using UnityEngine;
 [Serializable]
 public struct SentenceData
 {
-    public DIALOG_SPEAKER speakerType;
-    public string speakerName;
+    public DIALOG_SPEAKER speaker;
     public string textContent;
 
-    public SentenceData(DIALOG_SPEAKER speakerType, string speakerName, string textContent)
+    public SentenceData(DIALOG_SPEAKER speaker, string textContent)
     {
-        this.speakerType = speakerType;
-        this.speakerName = speakerName;
+        this.speaker = speaker;
         this.textContent = textContent;
     }
 }
@@ -22,7 +20,8 @@ public struct SentenceData
 //Enum pour savoir quelle type de personne parle
 public enum DIALOG_SPEAKER
 {
-    PLAYER,
-    STRANGER
+    NAUFRAGE,
+    MECHANT,
+    DEV
 }
 
