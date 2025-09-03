@@ -5,10 +5,11 @@ using TMPro;
 public class SkinManager : MonoBehaviour
 {
     public Skin[] allSkins; // Liste de tous les skins disponibles
+    public Transform characterDisplayContainer; // Parent des img des skins (conteneur dans le Canvas)
     public Image characterDisplay; // Image de prévisualisation du skin sélectionné
 
     public GameObject skinButtonPrefab; // Prefab du bouton d'achat/sélection de skin
-    public Transform skinButtonContainer; // Parent des boutons de skin (conteneur dans le Canvas)
+    public Transform skinButtonContainer; // Parent des boutons des skins (conteneur dans le Canvas)
 
     // Variables pour les noms des objets enfants dans le prefab du bouton de skin
     public string priceTextName = "PriceText"; // Nom de l'objet TextMeshPro enfant
@@ -30,8 +31,14 @@ public class SkinManager : MonoBehaviour
 
     void LoadSkins()
     {
-        // Assurez-vous que le conteneur est vide avant de charger les nouveaux boutons
+        // Assurez-vous que le conteneur des boutons est vide avant de charger les nouveaux boutons
         foreach (Transform child in skinButtonContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Assurez-vous que le conteneur des images de prévisualisation est vide
+        foreach (Transform child in characterDisplayContainer)
         {
             Destroy(child.gameObject);
         }
@@ -41,19 +48,25 @@ public class SkinManager : MonoBehaviour
             // Récupère si le skin est débloqué dans les préférences
             allSkins[i].unlocked = PlayerPrefs.GetInt("SkinUnlocked" + i, i == 0 ? 1 : 0) == 1;
 
-            // Crée un bouton pour chaque skin
+            // --- Section pour la création des boutons ---
             GameObject btn = Instantiate(skinButtonPrefab, skinButtonContainer);
             int index = i; // Capture de la variable pour la lambda
-
-            // Ajout du listener
             btn.GetComponent<Button>().onClick.AddListener(() => TrySelectSkin(index));
 
-            // Récupérer les références au texte et à l'icône de pièce
             TMP_Text buttonText = btn.GetComponentInChildren<TMP_Text>();
             Image coinIcon = btn.transform.Find(coinIconName)?.GetComponent<Image>();
-
-            // Met à jour l'affichage initial du bouton
             UpdateSkinButtonUI(buttonText, coinIcon, allSkins[i], i == currentSkinIndex);
+
+
+            // --- Section pour la création des images de prévisualisation ---
+            // Crée un nouvel objet Image pour chaque skin dans le conteneur dédié.
+            GameObject imgGameObject = new GameObject("SkinImage_" + allSkins[i].name);
+            imgGameObject.transform.SetParent(characterDisplayContainer);
+            imgGameObject.transform.localScale = Vector3.one;
+
+            Image img = imgGameObject.AddComponent<Image>();
+            img.sprite = allSkins[i].sprites[0]; // Assigne le sprite du skin
+            img.preserveAspect = true; // Conserve le ratio de l'image
         }
     }
 
@@ -80,10 +93,10 @@ public class SkinManager : MonoBehaviour
             SaveSelectedSkin(); // Nouvelle fonction pour sauvegarder le skin sélectionné
             DisplayCurrentSkin();
 
-            //if (PlayerSkinApplier.instance != null)
-            //{
-            //    PlayerSkinApplier.instance.ApplySkin(currentSkinIndex);
-            //}
+            if (PlayerSkinApplier.instance != null)
+            {
+                PlayerSkinApplier.instance.ApplySkin(currentSkinIndex);
+            }
 
             Debug.Log("Skin " + allSkins[index].name + " sélectionné.");
         }

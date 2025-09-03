@@ -8,20 +8,14 @@ public class Collect : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Collectible"))
         {
+            //Détruit l'objet
             Destroy(collision.gameObject);
-            UpdateCurrency("ArgentTest", 1);
+
+            //ajouter a l'inventaire quand collision avec Player
+            Inventory.instance.AddCoins(1);
+
             Debug.Log(PlayerPrefs.GetInt("ArgentTest").ToString());
         }
     }
 
-    private void UpdateCurrency(string currencyName, int currencyAmount)
-    {
-        if (!PlayerPrefs.HasKey(currencyName))
-        {
-            PlayerPrefs.SetInt(currencyName, currencyAmount);
-        } else
-        {
-            PlayerPrefs.SetInt(currencyName, PlayerPrefs.GetInt(currencyName) + currencyAmount);
-        }
-    }
 }
