@@ -53,11 +53,4 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Credits");
     }
-
-    //bouton resets playerpref
-    public void ResetPref()
-    {
-        PlayerPrefs.DeleteAll(); //supprime playerpref
-        PlayerPrefs.Save(); // assure enregistrement sur disque
-    }
 }
