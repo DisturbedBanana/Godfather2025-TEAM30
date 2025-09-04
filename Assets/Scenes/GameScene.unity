@@ -5721,6 +5721,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -199
       objectReference: {fileID: 0}
+    - target: {fileID: 8471902169819606674, guid: b345068ee82ed63438bb8b454b6b6737, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 291432618}
+    - target: {fileID: 8471902169819606674, guid: b345068ee82ed63438bb8b454b6b6737, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseSettingsWindow
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
