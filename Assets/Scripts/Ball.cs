@@ -6,6 +6,8 @@ public class Ball : MonoBehaviour
     private Rigidbody2D _rb2D;
     private LineRenderer _lineRenderer;
 
+    private Vector3 _respawnPoint;
+
     private bool _isDragging;
 
     void Start()
@@ -18,6 +20,9 @@ public class Ball : MonoBehaviour
     void Launch(Vector2 force)
     {
         _rb2D.linearVelocity = force * _speed;
+
+        //change spawn sur la position du dernier tir
+        _respawnPoint = transform.position;
     }
 
     private void Update()
@@ -45,6 +50,7 @@ public class Ball : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
 
+
         RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
         if (hit.collider != null && hit.collider.gameObject == gameObject)
         {
@@ -55,7 +61,7 @@ public class Ball : MonoBehaviour
     private void StartDrag()
     {
         _isDragging = true;
-        _lineRenderer.enabled = true;
+        _lineRenderer.enabled = true;        
     }
 
     private void EndDrag()
@@ -75,6 +81,27 @@ public class Ball : MonoBehaviour
         if (other.gameObject.CompareTag("LevelEnd"))
         {
             UIManager.Instance?.LevelFinished();
+        }
+
+        if (other.gameObject.CompareTag("Collectible"))
+        {
+            //Détruit l'objet
+            Destroy(other.gameObject);
+
+            //ajouter a l'inventaire quand collision avec Player
+            Inventory.instance.AddCoins(1);
+
+            Debug.Log(PlayerPrefs.GetInt("ArgentTest").ToString());
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Hole"))
+        {
+            transform.position = _respawnPoint;
+
+            _rb2D.linearVelocity = new Vector2(0,0);
         }
     }
 }

@@ -448,7 +448,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 1
   m_Spacing: 50
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -869,28 +869,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allSkins:
-  - name: Skin1
+  - name: Basic
     price: 0
     unlocked: 1
     sprites:
     - {fileID: 21300000, guid: 0d47c2b4f10bc5c44993e5d16231279f, type: 3}
-  - name: Skin2
-    price: 10
-    unlocked: 0
-    sprites:
-    - {fileID: 21300000, guid: 8e79d4173d0c83e42bfd1cd873ca4323, type: 3}
-  - name: Skin3
+  - name: Water
     price: 20
     unlocked: 0
     sprites:
-    - {fileID: 21300000, guid: d2d8cbe72050aeb44a2a75f1a8cf476d, type: 3}
-  - name: Skin4
+    - {fileID: 21300000, guid: 8e79d4173d0c83e42bfd1cd873ca4323, type: 3}
+  - name: Fire Balle
     price: 30
     unlocked: 0
     sprites:
-    - {fileID: 21300000, guid: 98ac5349c22a5d843bbd4e9438145f02, type: 3}
-  - name: Skin5
+    - {fileID: 21300000, guid: d2d8cbe72050aeb44a2a75f1a8cf476d, type: 3}
+  - name: Gold
     price: 40
+    unlocked: 0
+    sprites:
+    - {fileID: 21300000, guid: 98ac5349c22a5d843bbd4e9438145f02, type: 3}
+  - name: Black Hole
+    price: 50
     unlocked: 0
     sprites:
     - {fileID: 21300000, guid: 4ba67a8323cf29f408032c8a02ded076, type: 3}
