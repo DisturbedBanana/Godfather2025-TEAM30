@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -12,6 +13,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Light2D _levelLight;
     
     [SerializeField] private List<GameObject> _levelPrefabs;
+    [SerializeField] private int _levelDimTimer;
+    [SerializeField] private int _initialLevelIndex = 0;
+    [SerializeField] private SunAndMoon _sunAndMoon;
+    
     private int _currentLevelIndex;
     
     private GameObject _currentLevelObject;
@@ -22,6 +27,7 @@ public class LevelManager : MonoBehaviour
     
     private string _currentLevelName;
     public string CurrentLevelName => _currentLevelName;
+    
     
     private void Awake()
     {  
@@ -54,12 +60,7 @@ public class LevelManager : MonoBehaviour
                     Debug.Log("Loading level: " + _levelPrefabs[levelIndexToLoad].name);
                     _currentLevelObject = Instantiate(_levelPrefabs[levelIndexToLoad], Vector2.zero, Quaternion.identity);
                     _currentPar = _currentLevelObject.GetComponent<Level>().Par;
-                    DOTween.To(
-                        () => _levelLight.intensity,
-                        x => _levelLight.intensity = x,
-                        0f,
-                        2f
-                    ).SetEase(Ease.InOutElastic);
+                    StartCoroutine(DimTimer());
                 });
 
             // Only increment level index if not retrying
@@ -74,5 +75,26 @@ public class LevelManager : MonoBehaviour
     public void DestroyLevel()
     {
         Destroy(CurrentLevelObject);
+        _sunAndMoon.Rotate();
+    }
+
+    private IEnumerator DimTimer()
+    {
+        yield return new WaitForSeconds(_levelDimTimer);
+
+        DOTween.To(
+            () => _levelLight.intensity,
+            x => _levelLight.intensity = x,
+            0f,
+            2f
+        ).SetEase(Ease.InOutElastic);
+        
+        _sunAndMoon.Rotate();
+        
+        Ball ball = FindFirstObjectByType<Ball>();
+        if (ball != null)
+        {
+            ball.CanBeLaunched = true;
+        }
     }
 }
