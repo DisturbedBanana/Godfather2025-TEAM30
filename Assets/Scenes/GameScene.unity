@@ -516,6 +516,8 @@ MonoBehaviour:
   dialogText: {fileID: 1447716918}
   playerImg: {fileID: 529595311}
   strangerImg: {fileID: 515434260}
+  vilainSprite: {fileID: 3240178919299798887, guid: 7cf1a2ca596c0ff42a9b57588bf2ffb0, type: 3}
+  devSprite: {fileID: -5770627068122462255, guid: 7a49297614958a14ea4b02baf0fea32d, type: 3}
 --- !u!114 &261330331
 MonoBehaviour:
   m_ObjectHideFlags: 0

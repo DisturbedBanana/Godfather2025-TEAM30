@@ -12,6 +12,8 @@ public class DialogManager : MonoBehaviour, IPointerClickHandler
     public TMP_Text dialogText;
     public Image playerImg;
     public Image strangerImg;
+    public Sprite vilainSprite;
+    public Sprite devSprite;
 
     private int counter = 0;
     private bool isWriting = false;
@@ -49,11 +51,11 @@ public class DialogManager : MonoBehaviour, IPointerClickHandler
                 break;
             case DIALOG_SPEAKER.MECHANT:
                 speakerText.text = "Monsieur Mechant";
-                //Mettre le sprite du mechant sur strangerImg
+                strangerImg.sprite = vilainSprite;
                 break;
             case DIALOG_SPEAKER.DEV:
                 speakerText.text = "Un dev";
-                //Mettre le sprite du dev sur strangerImg
+                strangerImg.sprite = devSprite;
                 break;
         }
 
