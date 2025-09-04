@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 5506635324387757481}
   - component: {fileID: 8928686306698568743}
   - component: {fileID: 5956122088903575490}
+  - component: {fileID: 4983988467830990779}
   m_Layer: 0
   m_Name: GolfBall
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,6 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
+  _baseLinearDamping: 1.2
+  _sandLinearDamping: 3
 --- !u!50 &5506635324387757481
 Rigidbody2D:
   serializedVersion: 5
@@ -293,6 +296,45 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &4983988467830990779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6446550853832180536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b161f6db9ac3d964585cb0dc11c1c05d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allSkins:
+  - name: Basic
+    price: 0
+    unlocked: 1
+    sprites:
+    - {fileID: -7627733529822777162, guid: ea9cb08117f70064aaf1598df7ea6959, type: 3}
+  - name: Water
+    price: 20
+    unlocked: 0
+    sprites:
+    - {fileID: 3768298933040644959, guid: 939132cf56d72b74baefa4eb7362aa3d, type: 3}
+  - name: Fire Ball
+    price: 30
+    unlocked: 0
+    sprites:
+    - {fileID: 1338603833586857640, guid: daac9b5d7b16b6e41b6c03d39edb1788, type: 3}
+  - name: Gold
+    price: 40
+    unlocked: 0
+    sprites:
+    - {fileID: -3079722678121271134, guid: 01c3c22bc6865074fb0db9a4e3bbedef, type: 3}
+  - name: Black hole
+    price: 50
+    unlocked: 0
+    sprites:
+    - {fileID: -178098396436122259, guid: 29658dddeafe7bd489c737348a0fa156, type: 3}
+  playerSpriteRenderer: {fileID: 3777800499244107135}
 --- !u!1 &7826413325222508037
 GameObject:
   m_ObjectHideFlags: 0
