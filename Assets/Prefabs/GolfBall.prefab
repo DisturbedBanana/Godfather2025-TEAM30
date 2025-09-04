@@ -106,6 +106,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
+  _baseLinearDamping: 1.2
+  _sandLinearDamping: 3
 --- !u!50 &5506635324387757481
 Rigidbody2D:
   serializedVersion: 5
