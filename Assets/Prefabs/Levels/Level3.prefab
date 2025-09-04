@@ -682,7 +682,7 @@ GameObject:
   - component: {fileID: 5752696116095137598}
   - component: {fileID: 103850616876567650}
   m_Layer: 0
-  m_Name: Sand (6)
+  m_Name: Sand
   m_TagString: Sand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -816,7 +816,7 @@ GameObject:
   - component: {fileID: 7980459283850255022}
   - component: {fileID: 1055857049067947177}
   m_Layer: 0
-  m_Name: Hole (1)
+  m_Name: Hole
   m_TagString: Hole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -950,7 +950,7 @@ GameObject:
   - component: {fileID: 322673341390129117}
   - component: {fileID: 8267842283719033654}
   m_Layer: 0
-  m_Name: Sand (5)
+  m_Name: Sand
   m_TagString: Sand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1218,7 +1218,7 @@ GameObject:
   - component: {fileID: 9035523084414604176}
   - component: {fileID: 3702966628777510596}
   m_Layer: 0
-  m_Name: Sand (4)
+  m_Name: Sand
   m_TagString: Sand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1486,7 +1486,7 @@ GameObject:
   - component: {fileID: 1815377678125698270}
   - component: {fileID: 8316797436010948181}
   m_Layer: 0
-  m_Name: Sand (7)
+  m_Name: Sand
   m_TagString: Sand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2692,7 +2692,7 @@ GameObject:
   - component: {fileID: 1863633960085477453}
   - component: {fileID: 2339624688728393654}
   m_Layer: 0
-  m_Name: Sand (1)
+  m_Name: Sand
   m_TagString: Sand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3094,7 +3094,7 @@ GameObject:
   - component: {fileID: 2496424856276187838}
   - component: {fileID: 1072504483090551408}
   m_Layer: 0
-  m_Name: Sand (2)
+  m_Name: Sand
   m_TagString: Sand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3228,7 +3228,7 @@ GameObject:
   - component: {fileID: 7796896677967460442}
   - component: {fileID: 9141614119865130643}
   m_Layer: 0
-  m_Name: Sand (3)
+  m_Name: Sand
   m_TagString: Sand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
