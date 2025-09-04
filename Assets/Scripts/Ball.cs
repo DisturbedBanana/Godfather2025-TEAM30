@@ -67,14 +67,14 @@ public class Ball : MonoBehaviour
         Vector2 direction = -(mousePos - transform.position);
         float distance = direction.magnitude;
         Launch(direction.normalized * distance);
-        ScoreManager.Instance?.AddScore();
+        ScoreManager.Instance?.AddLevelScore();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("LevelEnd"))
         {
-            LevelManager.Instance?.EndLevel();
+            UIManager.Instance?.LevelFinished();
         }
     }
 }

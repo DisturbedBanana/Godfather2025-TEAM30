@@ -13,7 +13,8 @@ public class LevelNameMovements : MonoBehaviour
         transform.position = positions[0].position;
     }
 
-    public void MoveObjectAndSetText(string levelName, Action onComplete)
+    // Moves the object through a series of predefined positions while updating its text to display the level name.
+    public void MoveObjectAndSetText(string levelName, Action onComplete) 
     {
         if (positions.Count < 4) return;
         
@@ -21,20 +22,17 @@ public class LevelNameMovements : MonoBehaviour
 
         Sequence seq = DOTween.Sequence();
 
-        seq.Append(transform.DOMove(positions[1].position, 0.5f)
-            .OnStart(() => Debug.Log("Moving fast from 1 to 2")));
+        seq.Append(transform.DOMove(positions[1].position, 0.5f));
 
-        seq.Append(transform.DOMove(positions[2].position, 2f)
-            .OnStart(() => Debug.Log("Moving slow from 2 to 3")));
+        seq.Append(transform.DOMove(positions[2].position, 2f));
         
-        seq.Append(transform.DOMove(positions[3].position, 0.5f)
-            .OnStart(() => Debug.Log("Moving fast from 3 to 4"))
-            .OnComplete(ResetPosition));
-        
+        seq.Append(transform.DOMove(positions[3].position, 0.5f))
+            .OnComplete(ResetPosition);
+
         seq.OnComplete(() => onComplete?.Invoke());
     }
     
-    public void ResetPosition()
+    public void ResetPosition() // Resets the object's position to the starting point.
     {
         transform.position = positions[0].position;
     }
