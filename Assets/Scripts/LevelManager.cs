@@ -14,7 +14,6 @@ public class LevelManager : MonoBehaviour
     
     [SerializeField] private List<GameObject> _levelPrefabs;
     [SerializeField] private int _levelDimTimer;
-    [SerializeField] private int _initialLevelIndex = 0;
     [SerializeField] private SunAndMoon _sunAndMoon;
     
     private int _currentLevelIndex;
