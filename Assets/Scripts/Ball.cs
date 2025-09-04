@@ -93,10 +93,15 @@ public class Ball : MonoBehaviour
 
             Debug.Log(PlayerPrefs.GetInt("ArgentTest").ToString());
         }
+    }
 
-        if (other.gameObject.CompareTag("Hole"))
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Hole"))
         {
             transform.position = _respawnPoint;
+
+            _rb2D.linearVelocity = new Vector2(0,0);
         }
     }
 }
