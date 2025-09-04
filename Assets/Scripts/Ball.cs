@@ -6,6 +6,13 @@ public class Ball : MonoBehaviour
     private Rigidbody2D _rb2D;
     private LineRenderer _lineRenderer;
 
+    [SerializeField]
+    private float _baseLinearDamping;
+
+    [SerializeField] 
+    private float _sandLinearDamping;
+
+
     private Vector3 _respawnPoint;
 
     private bool _isDragging;
@@ -23,6 +30,8 @@ public class Ball : MonoBehaviour
 
         //change spawn sur la position du dernier tir
         _respawnPoint = transform.position;
+
+
     }
 
     private void Update()
@@ -102,6 +111,23 @@ public class Ball : MonoBehaviour
             transform.position = _respawnPoint;
 
             _rb2D.linearVelocity = new Vector2(0,0);
+        }
+
+        if (collision.gameObject.CompareTag("Sand"))
+        {
+            _rb2D.linearDamping = _sandLinearDamping;
+
+            Debug.LogError("Ball Slow");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Sand"))
+        {
+            _rb2D.linearDamping = _baseLinearDamping;
+
+            Debug.LogError("Ball no slow");
         }
     }
 }

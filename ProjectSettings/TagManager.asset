@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Collectible
   - LevelEnd
+  - Hole
+  - Sand
   layers:
   - Default
   - TransparentFX
