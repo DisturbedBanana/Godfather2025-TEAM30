@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class UIManager : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class UIManager : MonoBehaviour
         _dialogCanvas.SetActive(false);
         _levelCanvas.SetActive(true);
         LevelManager.Instance.LoadNextLevel();
+        ScoreManager.Instance.TotalScore = 0;
     }
     
     public void PlayNext(bool fromMenu)
@@ -43,6 +45,12 @@ public class UIManager : MonoBehaviour
         
         _levelCanvas.SetActive(true);
         LevelManager.Instance.LoadNextLevel();
+    }
+
+    public void BackToMainMenu()
+    {
+        _postLevelCanvas.SetActive(false);
+        _menuCanvas.SetActive(true);
     }
 
     public void Retry()

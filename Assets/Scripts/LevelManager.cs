@@ -56,18 +56,20 @@ public class LevelManager : MonoBehaviour
             _levelNameObject.GetComponent<LevelNameMovements>()
                 .MoveObjectAndSetText(_currentLevelName, () =>
                 {
-                    Debug.Log("Loading level: " + _levelPrefabs[levelIndexToLoad].name);
                     _currentLevelObject = Instantiate(_levelPrefabs[levelIndexToLoad], Vector2.zero, Quaternion.identity);
                     _currentPar = _currentLevelObject.GetComponent<Level>().Par;
                     StartCoroutine(DimTimer());
                 });
 
+            _levelNameObject.GetComponent<LevelNameMovements>().ResetPosition();
+            
             // Only increment level index if not retrying
             if (!isARetry) _currentLevelIndex++;
         }
         else
         {
             Debug.LogWarning("No more levels to load or index is out of range.");
+            UIManager.Instance.BackToMainMenu();
         }
     }
 
@@ -94,6 +96,13 @@ public class LevelManager : MonoBehaviour
         if (ball != null)
         {
             ball.CanBeLaunched = true;
+        }
+        
+        //Find the Lightning object and call its StartBlinking method
+        Lightning lightning = FindFirstObjectByType<Lightning>();
+        if (lightning != null)
+        {
+            lightning.StartBlinking();
         }
     }
 }

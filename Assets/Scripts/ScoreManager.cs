@@ -14,7 +14,7 @@ public class ScoreManager : MonoBehaviour
     private int _totalScore;
     
     public int CurrentLevelScore => _currentLevelScore;
-    public int TotalScore => _totalScore;
+    public int TotalScore { get => _totalScore; set => _totalScore = value; }
     
     private void Awake()
     {  

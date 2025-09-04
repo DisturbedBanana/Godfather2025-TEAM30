@@ -26,8 +26,7 @@ public class LevelNameMovements : MonoBehaviour
 
         seq.Append(transform.DOMove(positions[2].position, 2f));
         
-        seq.Append(transform.DOMove(positions[3].position, 0.5f))
-            .OnComplete(ResetPosition);
+        seq.Append(transform.DOMove(positions[3].position, 0.5f));
 
         seq.OnComplete(() => onComplete?.Invoke());
     }
