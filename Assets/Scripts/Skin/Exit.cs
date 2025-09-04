@@ -5,6 +5,6 @@ public class Exit : MonoBehaviour
 {
     public void OnExitButtonPressed()
     {
-        SceneManager.LoadScene("MainMenu"); // Retour au menu
+        SceneManager.LoadScene("GameScene"); // Retour au menu
     }
 }

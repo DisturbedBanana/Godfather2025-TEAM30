@@ -12,6 +12,15 @@ public class Ball : MonoBehaviour
     [SerializeField] 
     private float _sandLinearDamping;
 
+    [SerializeField]
+    private AudioClip sandSound;
+
+    [SerializeField]
+    private AudioClip holeSound;
+
+    [SerializeField]
+    private AudioClip dragSound;
+
 
     private Vector3 _respawnPoint;
 
@@ -83,6 +92,8 @@ public class Ball : MonoBehaviour
         float distance = direction.magnitude;
         Launch(direction.normalized * distance);
         ScoreManager.Instance?.AddLevelScore();
+        //ajoute effet sonnore quand tape la balle
+        AudioManager.instance.PlayClipAt(dragSound, transform.position);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -108,16 +119,25 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Hole"))
         {
+            //respawn de la balle à ca dernière position quand tombe dans le troue 
             transform.position = _respawnPoint;
 
+            //stop ça velocity quand tombe dans le troue
             _rb2D.linearVelocity = new Vector2(0,0);
+
+            //effets sonor quand tombe dans le troue
+            AudioManager.instance.PlayClipAt(holeSound, transform.position);
         }
 
         if (collision.gameObject.CompareTag("Sand"))
         {
+            //Slow balle dans le sable
             _rb2D.linearDamping = _sandLinearDamping;
 
             Debug.LogError("Ball Slow");
+
+            //effets sonor quand arrive dans le sable
+            AudioManager.instance.PlayClipAt(sandSound, transform.position);
         }
     }
 
