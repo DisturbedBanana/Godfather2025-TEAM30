@@ -45,8 +45,5 @@ public class ScoreManager : MonoBehaviour
         if (_currentLevelScore < LevelManager.Instance.CurrentPar) return;
         
         _totalScore += _currentLevelScore - LevelManager.Instance.CurrentLevelObject.GetComponent<Level>().Par;
-        Debug.Log("Level Score: " + _currentLevelScore);
-        Debug.Log("Par: " + LevelManager.Instance.CurrentLevelObject.GetComponent<Level>().Par);
-        Debug.Log("Total Score: " + _totalScore);
     }
 }
