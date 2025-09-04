@@ -20,11 +20,12 @@ public class Ball : MonoBehaviour
 
     [SerializeField]
     private AudioClip dragSound;
-
-
+    
     private Vector3 _respawnPoint;
-
     private bool _isDragging;
+    
+    private bool _canBeLaunched;
+    public bool CanBeLaunched { get { return _canBeLaunched; } set { _canBeLaunched = value; } }
 
     void Start()
     {
@@ -70,7 +71,7 @@ public class Ball : MonoBehaviour
 
 
         RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-        if (hit.collider != null && hit.collider.gameObject == gameObject)
+        if (hit.collider != null && hit.collider.gameObject == gameObject && CanBeLaunched)
         {
             StartDrag();
         }
@@ -105,7 +106,7 @@ public class Ball : MonoBehaviour
 
         if (other.gameObject.CompareTag("Collectible"))
         {
-            //Détruit l'objet
+            //Dï¿½truit l'objet
             Destroy(other.gameObject);
 
             //ajouter a l'inventaire quand collision avec Player
@@ -119,10 +120,10 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Hole"))
         {
-            //respawn de la balle à ca dernière position quand tombe dans le troue 
+            //respawn de la balle ï¿½ ca derniï¿½re position quand tombe dans le troue 
             transform.position = _respawnPoint;
 
-            //stop ça velocity quand tombe dans le troue
+            //stop ï¿½a velocity quand tombe dans le troue
             _rb2D.linearVelocity = new Vector2(0,0);
 
             //effets sonor quand tombe dans le troue
