@@ -9,13 +9,13 @@ public class Ball : MonoBehaviour
     [SerializeField]
     private float _baseLinearDamping;
 
-    [SerializeField] 
-    private float _sandLinearDamping;
-
-
+    [SerializeField] private float _sandLinearDamping;
+    
     private Vector3 _respawnPoint;
-
     private bool _isDragging;
+    
+    private bool _canBeLaunched;
+    public bool CanBeLaunched { get { return _canBeLaunched; } set { _canBeLaunched = value; } }
 
     void Start()
     {
@@ -58,10 +58,9 @@ public class Ball : MonoBehaviour
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
-
-
+        
         RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-        if (hit.collider != null && hit.collider.gameObject == gameObject)
+        if (hit.collider != null && hit.collider.gameObject == gameObject && _canBeLaunched)
         {
             StartDrag();
         }
@@ -94,7 +93,7 @@ public class Ball : MonoBehaviour
 
         if (other.gameObject.CompareTag("Collectible"))
         {
-            //Détruit l'objet
+            //Dï¿½truit l'objet
             Destroy(other.gameObject);
 
             //ajouter a l'inventaire quand collision avec Player
