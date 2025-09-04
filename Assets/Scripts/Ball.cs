@@ -76,5 +76,16 @@ public class Ball : MonoBehaviour
         {
             LevelManager.Instance?.EndLevel();
         }
+
+        if (other.gameObject.CompareTag("Collectible"))
+        {
+            //Détruit l'objet
+            Destroy(other.gameObject);
+
+            //ajouter a l'inventaire quand collision avec Player
+            Inventory.instance.AddCoins(1);
+
+            Debug.Log(PlayerPrefs.GetInt("ArgentTest").ToString());
+        }
     }
 }
