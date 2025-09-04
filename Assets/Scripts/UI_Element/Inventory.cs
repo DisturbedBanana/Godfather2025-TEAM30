@@ -59,7 +59,7 @@ public class Inventory : MonoBehaviour
 
     public int GetCoinsCount()
     {
-        return PlayerPrefs.GetInt(COINS_PLAYERPREFS_KEY, 30); // Récupère le total actuel des pièces
+        return PlayerPrefs.GetInt(COINS_PLAYERPREFS_KEY, 140); // Récupère le total actuel des pièces
     }
 
     // Met à jour l'affichage du nombre de pièces
