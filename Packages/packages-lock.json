@@ -14,7 +14,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.2d.aseprite": {
-      "version": "1.1.9",
+      "version": "1.1.10",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -39,12 +39,10 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.2d.pixel-perfect": {
-      "version": "5.1.0",
+      "version": "5.0.3",
       "depth": 1,
       "source": "registry",
-      "dependencies": {
-        "com.unity.modules.imgui": "1.0.0"
-      },
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.2d.psdimporter": {
@@ -128,13 +126,13 @@
       "source": "builtin",
       "dependencies": {
         "com.unity.2d.animation": "10.1.4",
-        "com.unity.2d.pixel-perfect": "5.1.0",
+        "com.unity.2d.pixel-perfect": "5.0.3",
         "com.unity.2d.psdimporter": "9.0.3",
         "com.unity.2d.sprite": "1.0.0",
         "com.unity.2d.spriteshape": "10.0.7",
         "com.unity.2d.tilemap": "1.0.0",
         "com.unity.2d.tilemap.extras": "4.1.0",
-        "com.unity.2d.aseprite": "1.1.9"
+        "com.unity.2d.aseprite": "1.1.10"
       }
     },
     "com.unity.ide.rider": {
@@ -255,14 +253,6 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
-    },
-    "com.unity.textmeshpro": {
-      "version": "5.0.0",
-      "depth": 0,
-      "source": "builtin",
-      "dependencies": {
-        "com.unity.ugui": "2.0.0"
-      }
     },
     "com.unity.ugui": {
       "version": "2.0.0",

@@ -15,7 +15,7 @@ public class DialogManager : MonoBehaviour, IPointerClickHandler
 
     private int counter = 0;
     private bool isWriting = false;
-    private bool isClickable => counter < dialogDatabase.dialogData.Count && !isWriting;
+    private bool isClickable => counter < dialogDatabase.dialogData.Count + 1 && !isWriting;
     
     private void Start()
     {
@@ -34,14 +34,21 @@ public class DialogManager : MonoBehaviour, IPointerClickHandler
     //Fonction qui va afficher les nouvelles phrases contenue dans la database du dialogue
     private void DisplaySentence()
     {
+        if (counter >= dialogDatabase.dialogData.Count)
+        {
+            // No more sentences to display, call DisplayMenu from UIManager
+            UIManager.Instance.HideDialog();
+            return;
+        }
+        
         //Change le nom de la personne qui parle, change le sprite si c'est un stranger
         switch (dialogDatabase.dialogData[counter].speaker)
         {
             case DIALOG_SPEAKER.NAUFRAGE:
-                speakerText.text = "Le Naufragé";
+                speakerText.text = "Le Naufrage";
                 break;
             case DIALOG_SPEAKER.MECHANT:
-                speakerText.text = "Monsieur Méchant";
+                speakerText.text = "Monsieur Mechant";
                 //Mettre le sprite du mechant sur strangerImg
                 break;
             case DIALOG_SPEAKER.DEV:
