@@ -21,10 +21,17 @@ public class UIManager : MonoBehaviour
         Instance ??= this;
     }
 
-    public void DisplayMenu()
+    public void DisplayDialog()
+    {
+        _menuCanvas.SetActive(false);
+        _dialogCanvas.SetActive(true);
+    }
+
+    public void HideDialog()
     {
         _dialogCanvas.SetActive(false);
-        _menuCanvas.SetActive(true);
+        _levelCanvas.SetActive(true);
+        LevelManager.Instance.LoadNextLevel();
     }
     
     public void PlayNext(bool fromMenu)

@@ -15,7 +15,7 @@ public class DialogManager : MonoBehaviour, IPointerClickHandler
 
     private int counter = 0;
     private bool isWriting = false;
-    private bool isClickable => counter < dialogDatabase.dialogData.Count && !isWriting;
+    private bool isClickable => counter < dialogDatabase.dialogData.Count + 1 && !isWriting;
     
     private void Start()
     {
@@ -24,12 +24,10 @@ public class DialogManager : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData pointerEventData)
     {
-        isWriting = true;
-        DisplaySentence();
-        
-        //Unneccessary condition ?
         if(isClickable)
         {
+            isWriting = true;
+            DisplaySentence();
         }
     }
 
@@ -39,7 +37,7 @@ public class DialogManager : MonoBehaviour, IPointerClickHandler
         if (counter >= dialogDatabase.dialogData.Count)
         {
             // No more sentences to display, call DisplayMenu from UIManager
-            UIManager.Instance.DisplayMenu();
+            UIManager.Instance.HideDialog();
             return;
         }
         
