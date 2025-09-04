@@ -74,7 +74,7 @@ public class PlayerSkinApplier : MonoBehaviour
                 newLightColor = Color.blue;
                 break;
             case 2:
-                newLightColor = new Color(255, 128, 0);
+                newLightColor = Color.yellow;
                 break;
             case 3:
                 newLightColor = Color.yellow;
@@ -85,6 +85,5 @@ public class PlayerSkinApplier : MonoBehaviour
         }
         
         GetComponentInChildren<Light2D>().color = newLightColor;
-        
     }
 }
