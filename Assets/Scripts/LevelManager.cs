@@ -54,12 +54,8 @@ public class LevelManager : MonoBehaviour
                     Debug.Log("Loading level: " + _levelPrefabs[levelIndexToLoad].name);
                     _currentLevelObject = Instantiate(_levelPrefabs[levelIndexToLoad], Vector2.zero, Quaternion.identity);
                     _currentPar = _currentLevelObject.GetComponent<Level>().Par;
-                    DOTween.To(
-                        () => _levelLight.intensity,
-                        x => _levelLight.intensity = x,
-                        0f,
-                        2f
-                    ).SetEase(Ease.InOutElastic);
+                    _levelNameObject.GetComponent<LevelNameMovements>().ResetPosition();
+                    StartCoroutine(DimTimer());
                 });
 
             // Only increment level index if not retrying
