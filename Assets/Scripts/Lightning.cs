@@ -6,6 +6,8 @@ using NaughtyAttributes;
 
 public class Lightning : MonoBehaviour
 {
+    [SerializeField]
+    private AudioClip lightningSound;
     public void StartBlinking()
     {
         StartCoroutine(BlinkCoroutine());
@@ -59,6 +61,9 @@ public class Lightning : MonoBehaviour
             5f,
             0.1f
         ).SetEase(Ease.OutExpo));
+
+        //LightingSoundEffect
+        AudioManager.instance.PlayClipAt(lightningSound, new Vector3(0, 0, 0));
 
         // Fade out
         lightningSequence.Append(DOTween.To(

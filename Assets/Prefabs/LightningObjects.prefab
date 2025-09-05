@@ -424,3 +424,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28dd9781658ff8449adf549f681fe25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lightningSound: {fileID: 8300000, guid: 0ca705b2b497c7a4183c64ba1d3e4e41, type: 3}
