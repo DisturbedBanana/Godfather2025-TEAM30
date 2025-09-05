@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _levelCanvas;
     [SerializeField] private GameObject _postLevelCanvas;
     [SerializeField] private GameObject _dialogCanvas;
+    [SerializeField] private GameObject _pauseCanvas;
     
     [SerializeField] private TextMeshProUGUI _postLevelNameText;
     [SerializeField] private TextMeshProUGUI _postLevelScoreText;
@@ -49,8 +50,11 @@ public class UIManager : MonoBehaviour
 
     public void BackToMainMenu()
     {
+        _levelCanvas.SetActive(false);
         _postLevelCanvas.SetActive(false);
+        _pauseCanvas.SetActive(false);
         _menuCanvas.SetActive(true);
+        ScoreManager.Instance.TotalScore = 0;
     }
 
     public void Retry()
@@ -71,5 +75,13 @@ public class UIManager : MonoBehaviour
         _postLevelScoreText.text = $"Level Score: {ScoreManager.Instance.CurrentLevelScore}";
         _postLevelTotalScoreText.text = $"Total Score: {ScoreManager.Instance.TotalScore}";
         LevelManager.Instance.DestroyLevel();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            _pauseCanvas.SetActive(!_pauseCanvas.activeInHierarchy);
+        }
     }
 }

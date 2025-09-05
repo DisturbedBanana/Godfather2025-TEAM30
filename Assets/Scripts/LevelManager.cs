@@ -41,12 +41,7 @@ public class LevelManager : MonoBehaviour
             _currentLevelIndex--;
         }
 
-        DOTween.To(
-            () => _levelLight.intensity,
-            x => _levelLight.intensity = x,
-            1f,
-            2f
-        ).SetEase(Ease.InOutElastic);
+        
 
         if (_currentLevelIndex >= 0 && _currentLevelIndex < _levelPrefabs.Count)
         {
@@ -77,6 +72,13 @@ public class LevelManager : MonoBehaviour
     {
         Destroy(CurrentLevelObject);
         _sunAndMoon.Rotate();
+        
+        DOTween.To(
+            () => _levelLight.intensity,
+            x => _levelLight.intensity = x,
+            1f,
+            2f
+        ).SetEase(Ease.InOutElastic);
     }
 
     private IEnumerator DimTimer()

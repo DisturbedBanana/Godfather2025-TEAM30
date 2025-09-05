@@ -6,27 +6,27 @@ public class SkinManager : MonoBehaviour
 {
     public Skin[] allSkins; // Liste de tous les skins disponibles
     public Transform characterDisplayContainer; // Parent des img des skins (conteneur dans le Canvas)
-    public Image characterDisplay; // Image de prévisualisation du skin sélectionné
+    public Image characterDisplay; // Image de prï¿½visualisation du skin sï¿½lectionnï¿½
 
-    public GameObject skinButtonPrefab; // Prefab du bouton d'achat/sélection de skin
+    public GameObject skinButtonPrefab; // Prefab du bouton d'achat/sï¿½lection de skin
     public Transform skinButtonContainer; // Parent des boutons des skins (conteneur dans le Canvas)
 
     // Variables pour les noms des objets enfants dans le prefab du bouton de skin
     public string priceTextName = "PriceText"; // Nom de l'objet TextMeshPro enfant
-    public string coinIconName = "CoinIcon"; // Nom de l'objet Image enfant (icône de pièce)
+    public string coinIconName = "CoinIcon"; // Nom de l'objet Image enfant (icï¿½ne de piï¿½ce)
 
-    private int currentSkinIndex = 0; // Index du skin actuellement sélectionné
+    private int currentSkinIndex = 0; // Index du skin actuellement sï¿½lectionnï¿½
 
-    // Clé PlayerPrefs pour le skin sélectionné
+    // Clï¿½ PlayerPrefs pour le skin sï¿½lectionnï¿½
     private const string SELECTED_SKIN_PLAYERPREFS_KEY = "SelectedSkin";
 
     void Start()
     {
-        // currentSkinIndex est chargé ici, PAS les pièces (Inventory.cs s'en charge)
+        // currentSkinIndex est chargï¿½ ici, PAS les piï¿½ces (Inventory.cs s'en charge)
         currentSkinIndex = PlayerPrefs.GetInt(SELECTED_SKIN_PLAYERPREFS_KEY, 0);
 
-        LoadSkins(); // Crée les boutons et charge les skins débloqués
-        DisplayCurrentSkin(); // Affiche le skin actuellement sélectionné
+        LoadSkins(); // Crï¿½e les boutons et charge les skins dï¿½bloquï¿½s
+        DisplayCurrentSkin(); // Affiche le skin actuellement sï¿½lectionnï¿½
     }
 
     void LoadSkins()
@@ -37,7 +37,7 @@ public class SkinManager : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        // Assurez-vous que le conteneur des images de prévisualisation est vide
+        // Assurez-vous que le conteneur des images de prï¿½visualisation est vide
         foreach (Transform child in characterDisplayContainer)
         {
             Destroy(child.gameObject);
@@ -45,10 +45,10 @@ public class SkinManager : MonoBehaviour
 
         for (int i = 0; i < allSkins.Length; i++)
         {
-            // Récupère si le skin est débloqué dans les préférences
+            // Rï¿½cupï¿½re si le skin est dï¿½bloquï¿½ dans les prï¿½fï¿½rences
             allSkins[i].unlocked = PlayerPrefs.GetInt("SkinUnlocked" + i, i == 0 ? 1 : 0) == 1;
 
-            // --- Section pour la création des boutons ---
+            // --- Section pour la crï¿½ation des boutons ---
             GameObject btn = Instantiate(skinButtonPrefab, skinButtonContainer);
             int index = i; // Capture de la variable pour la lambda
             btn.GetComponent<Button>().onClick.AddListener(() => TrySelectSkin(index));
@@ -58,8 +58,8 @@ public class SkinManager : MonoBehaviour
             UpdateSkinButtonUI(buttonText, coinIcon, allSkins[i], i == currentSkinIndex);
 
 
-            // --- Section pour la création des images de prévisualisation ---
-            // Crée un nouvel objet Image pour chaque skin dans le conteneur dédié.
+            // --- Section pour la crï¿½ation des images de prï¿½visualisation ---
+            // Crï¿½e un nouvel objet Image pour chaque skin dans le conteneur dï¿½diï¿½.
             GameObject imgGameObject = new GameObject("SkinImage_" + allSkins[i].name);
             imgGameObject.transform.SetParent(characterDisplayContainer);
             imgGameObject.transform.localScale = Vector3.one;
@@ -72,14 +72,14 @@ public class SkinManager : MonoBehaviour
 
     void DisplayCurrentSkin()
     {
-        // Affiche le sprite principal du skin sélectionné
+        // Affiche le sprite principal du skin sï¿½lectionnï¿½
         if (currentSkinIndex >= 0 && currentSkinIndex < allSkins.Length && allSkins[currentSkinIndex].sprites != null && allSkins[currentSkinIndex].sprites.Length > 0)
         {
             characterDisplay.sprite = allSkins[currentSkinIndex].sprites[0];
         }
         else
         {
-            Debug.LogWarning("Skin sélectionné invalide ou sprite manquant pour l'affichage : " + currentSkinIndex);
+            Debug.LogWarning("Skin sï¿½lectionnï¿½ invalide ou sprite manquant pour l'affichage : " + currentSkinIndex);
         }
     }
 
@@ -88,46 +88,44 @@ public class SkinManager : MonoBehaviour
 
         if (allSkins[index].unlocked)
         {
-            // Si déjà débloqué, on sélectionne simplement
+            // Si dï¿½jï¿½ dï¿½bloquï¿½, on sï¿½lectionne simplement
             currentSkinIndex = index;
-            SaveSelectedSkin(); // Nouvelle fonction pour sauvegarder le skin sélectionné
+            SaveSelectedSkin(); // Nouvelle fonction pour sauvegarder le skin sï¿½lectionnï¿½
             DisplayCurrentSkin();
 
             if (PlayerSkinApplier.instance != null)
             {
                 PlayerSkinApplier.instance.ApplySkin(currentSkinIndex);
             }
-
-            Debug.Log("Skin " + allSkins[index].name + " sélectionné.");
         }
-        else // Skin est verrouillé, tentative d'achat
+        else // Skin est verrouillï¿½, tentative d'achat
         {
-            // Vérifie les pièces via Inventory.instance
+            // Vï¿½rifie les piï¿½ces via Inventory.instance
             if (Inventory.instance.GetCoinsCount() >= allSkins[index].price)
             {
-                // Tente de retirer les pièces via Inventory.instance (qui gère la sauvegarde)
+                // Tente de retirer les piï¿½ces via Inventory.instance (qui gï¿½re la sauvegarde)
                 if (Inventory.instance.RemoveCoins(allSkins[index].price))
                 {
-                    // Si le retrait des pièces a réussi, on débloque le skin
+                    // Si le retrait des piï¿½ces a rï¿½ussi, on dï¿½bloque le skin
                     allSkins[index].unlocked = true;
-                    PlayerPrefs.SetInt("SkinUnlocked" + index, 1); // Enregistre le skin comme débloqué
+                    PlayerPrefs.SetInt("SkinUnlocked" + index, 1); // Enregistre le skin comme dï¿½bloquï¿½
 
-                    // Sélectionne automatiquement le skin après achat
+                    // Sï¿½lectionne automatiquement le skin aprï¿½s achat
                     currentSkinIndex = index;
-                    SaveSelectedSkin(); // Sauvegarde le skin sélectionné
+                    SaveSelectedSkin(); // Sauvegarde le skin sï¿½lectionnï¿½
                     DisplayCurrentSkin();
 
-                    Debug.Log("Skin " + allSkins[index].name + " acheté et sélectionné. Pièces restantes : " + Inventory.instance.GetCoinsCount());
+                    Debug.Log("Skin " + allSkins[index].name + " achetï¿½ et sï¿½lectionnï¿½. Piï¿½ces restantes : " + Inventory.instance.GetCoinsCount());
                 }
             }
             else
             {
-                // Le joueur n'a pas assez de pièces
-                Debug.Log("Pas assez de pièces pour acheter " + allSkins[index].name + ". Nécessite : " + allSkins[index].price + ", Possède : " + Inventory.instance.GetCoinsCount());
+                // Le joueur n'a pas assez de piï¿½ces
+                Debug.Log("Pas assez de piï¿½ces pour acheter " + allSkins[index].name + ". Nï¿½cessite : " + allSkins[index].price + ", Possï¿½de : " + Inventory.instance.GetCoinsCount());
             }
         }
 
-        // Met à jour le texte de tous les boutons après achat ou sélection (cela doit toujours se faire)
+        // Met ï¿½ jour le texte de tous les boutons aprï¿½s achat ou sï¿½lection (cela doit toujours se faire)
         for (int i = 0; i < skinButtonContainer.childCount; i++)
         {
             GameObject buttonObject = skinButtonContainer.GetChild(i).gameObject;
@@ -138,29 +136,29 @@ public class SkinManager : MonoBehaviour
         }
     }
 
-    // Fonction pour gérer la logique d'affichage du bouton
+    // Fonction pour gï¿½rer la logique d'affichage du bouton
     void UpdateSkinButtonUI(TMP_Text buttonText, Image coinIcon, Skin skinData, bool isCurrentSkin)
     {
         if (skinData.unlocked)
         {
             if (isCurrentSkin)
             {
-                buttonText.text = "E Q U I P ";
+                buttonText.text = "EQUIPPED";
             }
             else
             {
-                buttonText.text = "U S E";
+                buttonText.text = "OWNED";
             }
-            if (coinIcon != null) coinIcon.gameObject.SetActive(false); // Cache l'icône de pièce si déverrouillé
+            if (coinIcon != null) coinIcon.gameObject.SetActive(false); // Cache l'icï¿½ne de piï¿½ce si dï¿½verrouillï¿½
         }
         else
         {
             buttonText.text = skinData.name + " - " + skinData.price;
-            if (coinIcon != null) coinIcon.gameObject.SetActive(true); // Affiche l'icône de pièce si verrouillé
+            if (coinIcon != null) coinIcon.gameObject.SetActive(true); // Affiche l'icï¿½ne de piï¿½ce si verrouillï¿½
         }
     }
 
-    // Nouvelle fonction pour sauvegarder le skin sélectionné
+    // Nouvelle fonction pour sauvegarder le skin sï¿½lectionnï¿½
     void SaveSelectedSkin()
     {
         PlayerPrefs.SetInt(SELECTED_SKIN_PLAYERPREFS_KEY, currentSkinIndex);

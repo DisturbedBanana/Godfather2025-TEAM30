@@ -46,6 +46,11 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            UIManager.Instance?.LevelFinished();
+        }
+        
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             CheckForBallClick();
@@ -126,7 +131,8 @@ public class Ball : MonoBehaviour
             //stop �a velocity quand tombe dans le troue
             _rb2D.linearVelocity = new Vector2(0,0);
 
-            //effets sonor quand tombe dans le troue
+            //effets sonor quand tombe dans le trou
+            if (holeSound == null) return;
             AudioManager.instance.PlayClipAt(holeSound, transform.position);
         }
 
@@ -134,8 +140,6 @@ public class Ball : MonoBehaviour
         {
             //Slow balle dans le sable
             _rb2D.linearDamping = _sandLinearDamping;
-
-            Debug.LogError("Ball Slow");
 
             //effets sonor quand arrive dans le sable
             AudioManager.instance.PlayClipAt(sandSound, transform.position);
@@ -147,8 +151,6 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.CompareTag("Sand"))
         {
             _rb2D.linearDamping = _baseLinearDamping;
-
-            Debug.LogError("Ball no slow");
         }
     }
 }

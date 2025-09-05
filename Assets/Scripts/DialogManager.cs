@@ -40,6 +40,8 @@ public class DialogManager : MonoBehaviour, IPointerClickHandler
         {
             // No more sentences to display, call DisplayMenu from UIManager
             UIManager.Instance.HideDialog();
+            counter = 0;
+            isWriting = false;
             return;
         }
         
