@@ -55,6 +55,7 @@ public class UIManager : MonoBehaviour
         _pauseCanvas.SetActive(false);
         _menuCanvas.SetActive(true);
         ScoreManager.Instance.TotalScore = 0;
+        LevelManager.Instance.CurrentLevelIndex = 0;
     }
 
     public void Retry()

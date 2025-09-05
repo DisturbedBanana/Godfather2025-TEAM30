@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private SunAndMoon _sunAndMoon;
     
     private int _currentLevelIndex;
+    public int CurrentLevelIndex { get { return _currentLevelIndex; } set { _currentLevelIndex = value; } }
     
     private GameObject _currentLevelObject;
     public GameObject CurrentLevelObject => _currentLevelObject;
