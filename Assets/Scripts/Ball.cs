@@ -107,17 +107,6 @@ public class Ball : MonoBehaviour
             UIManager.Instance?.LevelFinished();
             AudioManager.instance.PlayClipAt(endSound, transform.position);
         }
-
-        if (other.gameObject.CompareTag("Collectible"))
-        {
-            //D�truit l'objet
-            Destroy(other.gameObject);
-
-            //ajouter a l'inventaire quand collision avec Player
-            Inventory.instance.AddCoins(20);
-
-            Debug.Log(PlayerPrefs.GetInt("ArgentTest").ToString());
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -141,6 +130,17 @@ public class Ball : MonoBehaviour
 
             //effets sonor quand arrive dans le sable
             AudioManager.instance.PlayClipAt(sandSound, transform.position);
+        }
+
+        if (collision.gameObject.CompareTag("Collectible"))
+        {
+            //D�truit l'objet
+            Destroy(collision.gameObject);
+
+            //ajouter a l'inventaire quand collision avec Player
+            Inventory.instance.AddCoins(20);
+
+            Debug.Log(PlayerPrefs.GetInt("ArgentTest").ToString());
         }
     }
 
