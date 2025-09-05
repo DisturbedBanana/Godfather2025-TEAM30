@@ -114,7 +114,7 @@ public class Ball : MonoBehaviour
             Destroy(other.gameObject);
 
             //ajouter a l'inventaire quand collision avec Player
-            Inventory.instance.AddCoins(1);
+            Inventory.instance.AddCoins(20);
 
             Debug.Log(PlayerPrefs.GetInt("ArgentTest").ToString());
         }
