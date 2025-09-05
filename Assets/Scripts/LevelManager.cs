@@ -60,7 +60,8 @@ public class LevelManager : MonoBehaviour
             _levelNameObject.GetComponent<LevelNameMovements>().ResetPosition();
             
             // Only increment level index if not retrying
-            if (!isARetry) _currentLevelIndex++;
+            //if (!isARetry)
+            _currentLevelIndex++;
         }
         else
         {

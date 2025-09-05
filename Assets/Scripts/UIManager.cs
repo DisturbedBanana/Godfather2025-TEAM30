@@ -55,6 +55,7 @@ public class UIManager : MonoBehaviour
         _pauseCanvas.SetActive(false);
         _menuCanvas.SetActive(true);
         ScoreManager.Instance.TotalScore = 0;
+        LevelManager.Instance.DestroyLevel();
         LevelManager.Instance.CurrentLevelIndex = 0;
     }
 
@@ -62,6 +63,7 @@ public class UIManager : MonoBehaviour
     {
         _postLevelCanvas.SetActive(false);
         _levelCanvas.SetActive(true);
+        LevelManager.Instance.DestroyLevel();
         LevelManager.Instance.LoadNextLevel(true);
     }
 
