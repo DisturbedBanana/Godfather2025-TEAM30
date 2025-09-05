@@ -49,11 +49,6 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            UIManager.Instance?.LevelFinished();
-        }
-        
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             CheckForBallClick();
