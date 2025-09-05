@@ -18495,7 +18495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1715713441781776226, guid: d8b51b23096657340b8cfe4a563a0e99, type: 3}
       propertyPath: _levelName
-      value: Level 8
+      value: Level 7
       objectReference: {fileID: 0}
     - target: {fileID: 3743850136060684140, guid: d8b51b23096657340b8cfe4a563a0e99, type: 3}
       propertyPath: m_Color.a
