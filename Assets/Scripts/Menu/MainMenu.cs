@@ -53,4 +53,10 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Credits");
     }
+
+    //boutton supprimer les donnés du jeu
+    public void ResetGame()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }
