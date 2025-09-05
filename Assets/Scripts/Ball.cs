@@ -20,7 +20,10 @@ public class Ball : MonoBehaviour
 
     [SerializeField]
     private AudioClip dragSound;
-    
+
+    [SerializeField]
+    private AudioClip endSound;
+
     private Vector3 _respawnPoint;
     private bool _isDragging;
     
@@ -46,11 +49,6 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            UIManager.Instance?.LevelFinished();
-        }
-        
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             CheckForBallClick();
@@ -107,6 +105,7 @@ public class Ball : MonoBehaviour
         if (other.gameObject.CompareTag("LevelEnd"))
         {
             UIManager.Instance?.LevelFinished();
+            AudioManager.instance.PlayClipAt(endSound, transform.position);
         }
 
         if (other.gameObject.CompareTag("Collectible"))
@@ -132,7 +131,6 @@ public class Ball : MonoBehaviour
             _rb2D.linearVelocity = new Vector2(0,0);
 
             //effets sonor quand tombe dans le trou
-            if (holeSound == null) return;
             AudioManager.instance.PlayClipAt(holeSound, transform.position);
         }
 

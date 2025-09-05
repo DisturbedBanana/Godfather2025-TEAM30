@@ -14,7 +14,7 @@ public class SettingsMenu : MonoBehaviour
     Resolution[] resolutions;
 
     public Slider musicSlider;
-    public Slider soundSlider;
+    public Slider soundEffectSlider;
 
     //résolutions
     public void Start()
@@ -24,8 +24,8 @@ public class SettingsMenu : MonoBehaviour
         audioMixer.GetFloat("Music", out float musicValueForSlider);
         musicSlider.value = musicValueForSlider;
 
-        audioMixer.GetFloat("Sound", out float soundValueForSlider);
-        soundSlider.value = soundValueForSlider;
+        audioMixer.GetFloat("Effects", out float soundValueForSlider);
+        soundEffectSlider.value = soundValueForSlider;
 
 
         //récupère les résolutins disponible pour le joueur et empêche les doublons

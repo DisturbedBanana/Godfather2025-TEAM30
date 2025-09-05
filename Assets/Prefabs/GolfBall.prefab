@@ -109,8 +109,9 @@ MonoBehaviour:
   _baseLinearDamping: 1.2
   _sandLinearDamping: 3
   sandSound: {fileID: 8300000, guid: 5743b61ce94b6cc44915a9c8ec9247ff, type: 3}
-  holeSound: {fileID: 0}
+  holeSound: {fileID: 8300000, guid: 4484e53215c2657438e38556995004d4, type: 3}
   dragSound: {fileID: 8300000, guid: 7c6f25380dea59f40bcb3136fd8e20da, type: 3}
+  endSound: {fileID: 8300000, guid: ba25ec70964b9c648ae3fa4b7d93697c, type: 3}
 --- !u!50 &5506635324387757481
 Rigidbody2D:
   serializedVersion: 5
